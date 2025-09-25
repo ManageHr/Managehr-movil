@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:padding="12dp"
+              android:weightSum="4"
+              android:background="?android:attr/selectableItemBackground">
+
+    <!-- Empresa -->
+    <TextView
+            android:id="@+id/tvEmpresa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    <!-- Cargo -->
+    <TextView
+            android:id="@+id/tvCargo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
+
+    <!-- Jefe -->
+    <TextView
+            android:id="@+id/tvJefe"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
+
+    <!-- Teléfono -->
+    <TextView
+            android:id="@+id/tvTelefono"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
+
+</LinearLayout>
