@@ -228,6 +228,7 @@
             android:background="@drawable/button_background"
             android:text="NEXT"
             android:textAllCaps="false"
+            android:onClick="irEstudios"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

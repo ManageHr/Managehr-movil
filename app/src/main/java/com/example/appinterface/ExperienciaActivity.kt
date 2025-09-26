@@ -49,7 +49,7 @@ class ExperienciaActivity: AppCompatActivity() {
 
         val buttonGoToSecondActivity: Button = findViewById(R.id.buttonSegundaActividad)
         buttonGoToSecondActivity.setOnClickListener {
-            val intent = Intent(this, ProductosActivity::class.java)
+            val intent = Intent(this, EstudiosActivity::class.java)
             startActivity(intent)
         }
         val btnCrear = findViewById<Button>(R.id.btnCrearExperiencia)
@@ -65,12 +65,6 @@ class ExperienciaActivity: AppCompatActivity() {
             mostrarExperiencias(it)
         }
 
-        buttonGoToSecondActivity.setOnClickListener {
-            val intent = Intent(this, ProductosActivity::class.java)
-            startActivity(intent)
-        }
-
-        Log.d("MainActivity", "Configuración completada")
 
 
         mostrarExperiencias()
@@ -141,7 +135,10 @@ class ExperienciaActivity: AppCompatActivity() {
             }
         })
     }
-
+    fun irEstudios(view: View) {
+        val intent = Intent(this, EstudiosActivity::class.java)
+        startActivity(intent)
+    }
     fun mostrarExperiencias(v: View? = null) {
         println("MainActivity: Solicitando experiencias...")
 
