@@ -1,5 +1,6 @@
 package com.example.appinterface.Api
 
+import com.example.appinterface.LoginActivity
 import com.example.appinterface.Models.EstudiosDto
 import com.example.appinterface.Models.ExperienciaDto
 import com.example.appinterface.Models.HojaDeVidaDto
@@ -27,4 +28,6 @@ interface ApiServicesKotlin {
     @POST("api/hojas-de-vida")
     fun crearHojasDeVida(@Body hojavida: HojaDeVidaDto): Call<Void>
 
+    @POST("api/auth/login")
+    fun login(@Body loginRequest: LoginActivity.LoginRequest): Call<LoginActivity.LoginResponse>
 }
