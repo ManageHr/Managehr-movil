@@ -7,15 +7,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#202940"
-        tools:context=".EstudiosActivity">
+        tools:context=".ExperienciaActivity">
 
-    <!-- Título -->
+
     <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Formulario de Estudios"
+            android:text="Formulario de Experiencia"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -23,9 +23,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Nombre del Estudio -->
+
     <EditText
-            android:id="@+id/etNomEstudio"
+            android:id="@+id/etEmpresa"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -33,7 +33,7 @@
             android:layout_marginEnd="24dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
-            android:hint="Nombre del Estudio"
+            android:hint="Nombre de la Empresa"
             android:inputType="text"
             android:padding="12dp"
             android:textColor="#FFFFFF"
@@ -42,9 +42,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <!-- Institución -->
     <EditText
-            android:id="@+id/etInstitucion"
+            android:id="@+id/etCargo"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -52,18 +51,17 @@
             android:layout_marginEnd="24dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
-            android:hint="Institución"
+            android:hint="Cargo"
             android:inputType="text"
             android:padding="12dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#CCCCCC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etNomEstudio" />
+            app:layout_constraintTop_toBottomOf="@+id/etEmpresa" />
 
-    <!-- Título Obtenido -->
     <EditText
-            android:id="@+id/etTituloObtenido"
+            android:id="@+id/etJefe"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -71,18 +69,55 @@
             android:layout_marginEnd="24dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
-            android:hint="Título Obtenido"
+            android:hint="Nombre del Jefe"
             android:inputType="text"
             android:padding="12dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#CCCCCC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etInstitucion" />
+            app:layout_constraintTop_toBottomOf="@+id/etCargo" />
 
-    <!-- Año de Inicio -->
     <EditText
-            android:id="@+id/etAnioInicio"
+            android:id="@+id/etTelefono"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/edittext_background"
+            android:ems="10"
+            android:hint="Teléfono"
+            android:inputType="phone"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etJefe" />
+
+
+    <EditText
+            android:id="@+id/etActividades"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/edittext_background"
+            android:ems="10"
+            android:hint="Actividades"
+            android:inputType="text"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etTelefono" />
+
+
+    <EditText
+            android:id="@+id/etFechaInicio"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -97,11 +132,11 @@
             android:textColorHint="#CCCCCC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etTituloObtenido" />
+            app:layout_constraintTop_toBottomOf="@+id/etActividades" />
 
-    <!-- Año de Finalización -->
+
     <EditText
-            android:id="@+id/etAnioFin"
+            android:id="@+id/etFechaFin"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -116,44 +151,46 @@
             android:textColorHint="#CCCCCC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etAnioInicio" />
+            app:layout_constraintTop_toBottomOf="@+id/etFechaInicio" />
 
-    <!-- Botones -->
+
     <Button
-            android:id="@+id/btnCrearEstudio"
+            android:id="@+id/btnCrearExperiencia"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="12dp"
             android:background="@drawable/button_background"
+            android:onClick="crearExperiencia"
             android:text="Crear"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/btnMostrarEstudios"
+            app:layout_constraintEnd_toStartOf="@+id/btnMostrarExperiencias"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etAnioFin" />
+            app:layout_constraintTop_toBottomOf="@+id/etFechaFin" />
 
     <Button
-            android:id="@+id/btnMostrarEstudios"
+            android:id="@+id/btnMostrarExperiencias"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/button_background"
+            android:onClick="mostrarExperiencias"
             android:text="Mostrar"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnCrearEstudio"
-            app:layout_constraintTop_toBottomOf="@+id/etAnioFin" />
+            app:layout_constraintStart_toEndOf="@+id/btnCrearExperiencia"
+            app:layout_constraintTop_toBottomOf="@+id/etFechaFin" />
 
-    <!-- Mensaje -->
+
     <TextView
             android:id="@+id/tvMensaje"
             android:layout_width="137dp"
@@ -167,28 +204,23 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnCrearEstudio"
+            app:layout_constraintTop_toBottomOf="@+id/btnCrearExperiencia"
             app:layout_constraintHorizontal_bias="0.896"/>
-
-    <!-- RecyclerView para Estudios -->
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecyEstudios"
+            android:id="@+id/RecyExperiencias"
             android:layout_width="185dp"
             android:layout_height="173dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="60dp"
             android:background="@drawable/table_background"
-            app:layout_constraintBottom_toTopOf="@+id/buttonSiguienteActividad"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSegundaActividad"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvMensaje"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toTopOf="@+id/tvMensaje" app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintVertical_bias="0.0"/>
-
-    <!-- Botón siguiente actividad -->
     <Button
-            android:id="@+id/buttonSiguienteActividad"
+            android:id="@+id/buttonSegundaActividad"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginEnd="24dp"
@@ -196,8 +228,8 @@
             android:background="@drawable/button_background"
             android:text="NEXT"
             android:textAllCaps="false"
+            android:onClick="irEstudios"
             android:textColor="#FFFFFF"
-            android:onClick="irHojas"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
