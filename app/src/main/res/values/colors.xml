@@ -4,4 +4,9 @@
 	<color name="white">#FFFFFFFF</color>
 	<color name="table_row_even">#2a304f</color>
 	<color name="table_row_odd">#343b5f</color>
+	<color name="menu_background">#1B0B3B</color> <!-- Ejemplo morado oscuro -->
+	<color name="nav_item_color_normal">#FFFFFF</color> <!-- Blanco -->
+	<color name="nav_item_color_checked">#9FA8DA</color> <!-- Azul suave -->
+
+
 </resources>

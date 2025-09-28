@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="12dp"
+              android:background="#24304D"
+              android:layout_marginBottom="8dp">
+
+    <TextView
+            android:id="@+id/itemFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2025-06-18"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"/>
+
+    <TextView
+            android:id="@+id/itemDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción"
+            android:textColor="#CCCCCC"/>
+
+    <TextView
+            android:id="@+id/itemCantidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 h"
+            android:textColor="#CCCCCC"/>
+
+    <TextView
+            android:id="@+id/itemTipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo: 3"
+            android:textColor="#CCCCCC"/>
+
+    <TextView
+            android:id="@+id/itemEstado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activo"
+            android:textColor="#CCCCCC"/>
+
+    <TextView
+            android:id="@+id/itemContrato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contrato: 1"
+            android:textColor="#CCCCCC"/>
+</LinearLayout>

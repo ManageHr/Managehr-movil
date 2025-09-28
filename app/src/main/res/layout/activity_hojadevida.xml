@@ -25,18 +25,21 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Campo ID (solo lectura, para mostrar, si es necesario) -->
+
+    <!-- Clave de la libreta militar -->
+
+    <!-- Número de libreta militar -->
+
+    <!-- Campo Usuario Número Documento -->
     <TextView
             android:id="@+id/tvId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ID: ..."
+            android:layout_width="12dp"
+            android:layout_height="5dp"
             android:textColor="#FFFFFF"
             android:padding="8dp"
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@+id/tvTitulo"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-    <!-- Clave de la libreta militar -->
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
     <EditText
             android:id="@+id/etClaseLibretaMilitar"
             android:layout_width="0dp"
@@ -51,9 +54,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
-
-    <!-- Número de libreta militar -->
+            android:layout_marginEnd="16dp" app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="20dp"/>
     <EditText
             android:id="@+id/etNumeroLibreta"
             android:layout_width="0dp"
@@ -68,9 +69,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginEnd="16dp" android:layout_marginTop="8dp" app:layout_constraintHorizontal_bias="0.0"/>
 
-    <!-- Campo Usuario Número Documento -->
+    <!-- Botón para guardar -->
     <EditText
             android:id="@+id/etUsuarioNumDocumento"
             android:layout_width="0dp"
@@ -85,13 +86,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginEnd="16dp" android:layout_marginTop="8dp" app:layout_constraintHorizontal_bias="0.0"/>
 
-    <!-- Botón para guardar -->
+    <!-- Botón para regresar o navegar -->
     <Button
             android:id="@+id/btnGuardar"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_width="131dp"
+            android:layout_height="40dp"
             android:text="Guardar"
             android:background="@drawable/button_background"
             android:textColor="#FFFFFF"
@@ -101,11 +102,9 @@
             app:layout_constraintTop_toBottomOf="@+id/etUsuarioNumDocumento"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="12dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"/>
-
-    <!-- Botón para regresar o navegar -->
     <TextView
             android:id="@+id/tvMensaje"
             android:layout_width="137dp"
@@ -136,9 +135,9 @@
             app:layout_constraintHorizontal_bias="0.444"/>
     <Button
             android:id="@+id/btnRegresar"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="NEXT"
+            android:layout_width="118dp"
+            android:layout_height="38dp"
+            android:text="Siguiente"
             android:background="@drawable/button_background"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
@@ -146,6 +145,6 @@
             app:layout_constraintTop_toBottomOf="@+id/btnGuardar"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="348dp"
-            android:layout_marginStart="280dp"/>
+            android:layout_marginStart="268dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class EstudiosActivity : AppCompatActivity() {
+class EstudiosActivity : BaseActivity() {
 
     private lateinit var adapter: EstudiosAdapter
     private lateinit var recyclerView: RecyclerView
@@ -32,7 +32,7 @@ class EstudiosActivity : AppCompatActivity() {
         enableEdgeToEdge()
 
 
-        setContentView(R.layout.estudios_main) // ← Si este es el nombre correcto
+        setModuleContent(R.layout.estudios_main) // ← Si este es el nombre correcto
 
 
 
