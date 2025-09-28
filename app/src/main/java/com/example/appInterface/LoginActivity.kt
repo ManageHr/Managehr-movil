@@ -48,7 +48,6 @@ class LoginActivity : AppCompatActivity() {
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
         btnLogin = findViewById(R.id.btnLogin)
-        btnOfertas = findViewById(R.id.btnOfertas)
         tvOlvidePassword = findViewById(R.id.tvOlvidePassword)
     }
 
@@ -56,12 +55,6 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             realizarLogin()
         }
-
-        btnOfertas.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
-
         tvOlvidePassword.setOnClickListener {
             Toast.makeText(this, "Funcionalidad en desarrollo", Toast.LENGTH_SHORT).show()
         }

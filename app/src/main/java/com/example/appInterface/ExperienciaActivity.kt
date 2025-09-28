@@ -21,7 +21,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ExperienciaActivity: AppCompatActivity() {
+class ExperienciaActivity: BaseActivity() {
     private lateinit var adapter: ExperienciaAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvMensaje: TextView
@@ -30,7 +30,7 @@ class ExperienciaActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_experiencia)
+        setModuleContent(R.layout.activity_experiencia)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

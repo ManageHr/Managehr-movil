@@ -4,6 +4,7 @@ import com.example.appinterface.LoginActivity
 import com.example.appinterface.Models.EstudiosDto
 import com.example.appinterface.Models.ExperienciaDto
 import com.example.appinterface.Models.HojaDeVidaDto
+import com.example.appinterface.Models.HorasExtraDto
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -30,4 +31,10 @@ interface ApiServicesKotlin {
 
     @POST("api/auth/login")
     fun login(@Body loginRequest: LoginActivity.LoginRequest): Call<LoginActivity.LoginResponse>
+
+    @POST("api/horasextra")
+    fun crearHorasExtra(@Body dto: HorasExtraDto): Call<Void>
+
+    @GET("api/horasextra")
+    fun obtenerHorasExtra(): Call<List<HorasExtraDto>>
 }

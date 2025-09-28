@@ -121,20 +121,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.0" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="532dp"/>
-    <Button
-            android:id="@+id/btnOfertas"
-            android:layout_width="293dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/button_background"
-            android:text="Ver Ofertas Laborales"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvBienvenida" app:layout_constraintHorizontal_bias="0.614"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/nav_usuarios"
+            android:icon="@drawable/ic_person"
+            android:title="Usuarios" />
+
+    <item
+            android:id="@+id/nav_hojasvida"
+            android:icon="@drawable/ic_description"
+            android:title="Hojas de vida" />
+
+    <item
+            android:id="@+id/nav_estudios"
+            android:title="Estudios" />
+
+    <item
+            android:title="Permisos" />
+
+    <item
+            android:id="@+id/nav_vacaciones"
+            android:title="Vacaciones" />
+
+    <item
+            android:id="@+id/nav_horas_extra"
+            android:title="Horas Extra" />
+
+    <item
+            android:id="@+id/nav_incapacidades"
+            android:title="Incapacidades" />
+
+</menu>

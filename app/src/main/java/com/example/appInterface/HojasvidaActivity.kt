@@ -14,14 +14,14 @@ import com.example.appinterface.Adapter.HojaDeVidaAdapter
 import com.example.appinterface.Api.RetrofitInstance
 import com.example.appinterface.Models.HojaDeVidaDto
 
-class HojasvidaActivity: AppCompatActivity() {
+class HojasvidaActivity: BaseActivity() {
     private lateinit var adapter: HojaDeVidaAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvMensaje: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hojadevida)
+        setModuleContent(R.layout.activity_hojadevida)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.tvId)) { v, insets ->
             val systemBars = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars())
