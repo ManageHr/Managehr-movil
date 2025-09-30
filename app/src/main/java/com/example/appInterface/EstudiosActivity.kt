@@ -1,9 +1,8 @@
-package com.example.appinterface
+package com.example.appInterface
 
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.annotation.SuppressLint
@@ -15,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appinterface.Adapter.EstudiosAdapter
 import com.example.appinterface.Models.EstudiosDto
 import com.example.appinterface.Api.RetrofitInstance
-import com.example.appinterface.Models.ExperienciaDto
+import com.example.appinterface.BaseActivity
+import com.example.appinterface.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,10 +31,7 @@ class EstudiosActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-
-        setModuleContent(R.layout.estudios_main) // ← Si este es el nombre correcto
-
-
+        setModuleContent(R.layout.estudios_main)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -42,15 +39,16 @@ class EstudiosActivity : BaseActivity() {
             insets
         }
 
-
         tvMensaje = findViewById(R.id.tvMensaje)
-
 
         recyclerView = findViewById(R.id.RecyEstudios)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = EstudiosAdapter()
-        recyclerView.adapter = adapter
 
+        // Adapter con función de clic
+        adapter = EstudiosAdapter(emptyList()) { estudio ->
+            mostrarDialogoEditarEstudio(estudio)
+        }
+        recyclerView.adapter = adapter
 
         val btnCrear = findViewById<Button>(R.id.btnCrearEstudio)
         val btnMostrar = findViewById<Button>(R.id.btnMostrarEstudios)
@@ -91,13 +89,11 @@ class EstudiosActivity : BaseActivity() {
         val anioInicio = etAnioInicio.text.toString()
         val anioFin = etAnioFin.text.toString()
 
-        // USAR LA MISMA VALIDACIÓN QUE EN EXPERIENCIAS
         if (!isValidDateFormat(anioInicio) || !isValidDateFormat(anioFin)) {
             mostrarMensaje("Error: Formato debe ser YYYY-MM-DD", true)
             return
         }
 
-        // Validar que la fecha de finalización no sea menor a la de inicio
         if (anioFin < anioInicio) {
             mostrarMensaje("Error: La fecha de finalización no puede ser menor a la de inicio", true)
             return
@@ -115,14 +111,152 @@ class EstudiosActivity : BaseActivity() {
         crearEstudioEnApi(estudiosDto)
     }
 
-    // USA LA MISMA FUNCIÓN DE VALIDACIÓN QUE EXPERIENCIAS
+    // NUEVOS MÉTODOS PARA EDITAR Y ELIMINAR:
+
+    private fun mostrarDialogoEditarEstudio(estudio: EstudiosDto) {
+        val dialog = android.app.Dialog(this)
+        dialog.setContentView(R.layout.dialog_editar_estudio)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setCancelable(true)
+
+        val etNomEstudio = dialog.findViewById<EditText>(R.id.etEditNomEstudio)
+        val etInstitucion = dialog.findViewById<EditText>(R.id.etEditInstitucion)
+        val etTitulo = dialog.findViewById<EditText>(R.id.etEditTituloObtenido)
+        val etAnioInicio = dialog.findViewById<EditText>(R.id.etEditAnioInicio)
+        val etAnioFin = dialog.findViewById<EditText>(R.id.etEditAnioFin)
+
+        // Llenar campos con datos actuales
+        etNomEstudio.setText(estudio.nomEstudio)
+        etInstitucion.setText(estudio.nomInstitucion)
+        etTitulo.setText(estudio.tituloObtenido)
+        etAnioInicio.setText(estudio.anioInicio)
+        etAnioFin.setText(estudio.anioFinalizacion)
+
+        // Botón Guardar Cambios
+        dialog.findViewById<Button>(R.id.btnGuardarEstudio).setOnClickListener {
+            val nomEstudio = etNomEstudio.text.toString()
+            val institucion = etInstitucion.text.toString()
+            val titulo = etTitulo.text.toString()
+            val anioInicio = etAnioInicio.text.toString()
+            val anioFin = etAnioFin.text.toString()
+
+            if (nomEstudio.isEmpty() || institucion.isEmpty() || titulo.isEmpty() ||
+                anioInicio.isEmpty() || anioFin.isEmpty()) {
+                Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidDateFormat(anioInicio) || !isValidDateFormat(anioFin)) {
+                Toast.makeText(this, "Error: Formato debe ser YYYY-MM-DD", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (anioFin < anioInicio) {
+                Toast.makeText(this, "Error: La fecha de finalización no puede ser menor a la de inicio", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val estudioActualizado = estudio.copy(
+                nomEstudio = nomEstudio,
+                nomInstitucion = institucion,
+                tituloObtenido = titulo,
+                anioInicio = anioInicio,
+                anioFinalizacion = anioFin
+            )
+
+            actualizarEstudioEnApi(estudioActualizado)
+            dialog.dismiss()
+        }
+
+        // Botón Eliminar
+        dialog.findViewById<Button>(R.id.btnEliminarEstudio).setOnClickListener {
+            dialog.dismiss()
+            mostrarDialogoConfirmarEliminacionEstudio(estudio)
+        }
+
+        dialog.show()
+    }
+
+    private fun mostrarDialogoConfirmarEliminacionEstudio(estudio: EstudiosDto) {
+        val dialog = android.app.Dialog(this)
+        dialog.setContentView(R.layout.dialog_confirmar_eliminar_estudio)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setCancelable(true)
+
+        val tvMensajeConfirmacion = dialog.findViewById<TextView>(R.id.tvMensajeConfirmacion)
+        tvMensajeConfirmacion.text = "¿Estás seguro de que deseas eliminar el estudio: ${estudio.nomEstudio}?\n\nEsta acción no se puede deshacer."
+
+        // Botón Cancelar
+        dialog.findViewById<Button>(R.id.btnCancelarEliminar).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        // Botón Confirmar Eliminar
+        dialog.findViewById<Button>(R.id.btnConfirmarEliminar).setOnClickListener {
+            eliminarEstudioEnApi(estudio.idEstudios!!)
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun actualizarEstudioEnApi(estudio: EstudiosDto) {
+        val id = estudio.idEstudios ?: return
+
+        RetrofitInstance.api2kotlin.actualizarEstudio(id, estudio).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    mostrarMensaje("✓ Estudio actualizado correctamente", false)
+                    mostrarEstudios() // Recargar lista
+                    Toast.makeText(this@EstudiosActivity, "Estudio actualizado", Toast.LENGTH_SHORT).show()
+                } else {
+                    when (response.code()) {
+                        404 -> mostrarMensaje("Error: Estudio no encontrado", true)
+                        400 -> mostrarMensaje("Error: Datos inválidos", true)
+                        else -> mostrarMensaje("Error al actualizar: ${response.code()}", true)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                mostrarMensaje("Error de conexión al actualizar", true)
+            }
+        })
+    }
+
+    private fun eliminarEstudioEnApi(id: Long) {
+        RetrofitInstance.api2kotlin.eliminarEstudio(id).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    mostrarMensaje("✓ Estudio eliminado correctamente", false)
+                    mostrarEstudios() // Recargar lista
+                    Toast.makeText(this@EstudiosActivity, "Estudio eliminado", Toast.LENGTH_SHORT).show()
+                } else {
+                    when (response.code()) {
+                        404 -> mostrarMensaje("Error: Estudio no encontrado", true)
+                        400 -> mostrarMensaje("Error: No se pudo eliminar el estudio", true)
+                        else -> mostrarMensaje("Error al eliminar: ${response.code()}", true)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                mostrarMensaje("Error de conexión al eliminar", true)
+            }
+        })
+    }
+
+    // MÉTODOS EXISTENTES (mantener igual):
+
     private fun isValidDateFormat(date: String): Boolean {
         return date.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))
     }
+
     fun irHojas(view: View) {
         val intent = Intent(this, HojasvidaActivity::class.java)
         startActivity(intent)
     }
+
     private fun crearEstudioEnApi(estudio: EstudiosDto) {
         println("EstudiosActivity: Creando estudio...")
 
@@ -133,7 +267,7 @@ class EstudiosActivity : BaseActivity() {
                 if (response.isSuccessful) {
                     mostrarMensaje("✓ Estudio creado exitosamente", false)
                     limpiarCampos()
-                    mostrarEstudios() // Actualizar la lista
+                    mostrarEstudios()
                 } else {
                     val errorMessage = when (response.code()) {
                         400 -> "Error: Datos inválidos"
@@ -153,8 +287,6 @@ class EstudiosActivity : BaseActivity() {
             }
         })
     }
-
-
 
     fun mostrarEstudios(view: View? = null) {
         println("EstudiosActivity: Solicitando estudios...")

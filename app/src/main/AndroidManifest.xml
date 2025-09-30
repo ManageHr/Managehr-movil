@@ -32,13 +32,13 @@
 				android:name=".HorasExtraActivity"
 				android:exported="true" />
 		<activity
-				android:name=".EstudiosActivity"
+				android:name="com.example.appInterface.EstudiosActivity"
 				android:exported="true" />
 		<activity
-				android:name=".ExperienciaActivity"
+				android:name="com.example.appInterface.ExperienciaActivity"
 				android:exported="true" />
 		<activity
-				android:name=".HojasvidaActivity"
+				android:name="com.example.appInterface.HojasvidaActivity"
 				android:exported="false" />
 
 		<!-- Otras activities sin launcher... -->
