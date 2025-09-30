@@ -1,4 +1,4 @@
-package com.example.appinterface
+package com.example.appInterface
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,15 +8,17 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appinterface.Adapter.ExperienciaAdapter
 import com.example.appinterface.Api.RetrofitInstance
+import com.example.appinterface.BaseActivity
 import com.example.appinterface.Models.ExperienciaDto
+import com.example.appinterface.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,13 +40,15 @@ class ExperienciaActivity: AppCompatActivity() {
             insets
         }
 
-
         tvMensaje = findViewById(R.id.tvMensaje)
-
 
         recyclerView = findViewById(R.id.RecyExperiencias)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ExperienciaAdapter()
+
+        // MODIFICA ESTA LÍNEA para agregar el click:
+        adapter = ExperienciaAdapter { experiencia ->
+            mostrarDialogoEditarExperiencia(experiencia)
+        }
         recyclerView.adapter = adapter
 
         val buttonGoToSecondActivity: Button = findViewById(R.id.buttonSegundaActividad)
@@ -52,11 +56,12 @@ class ExperienciaActivity: AppCompatActivity() {
             val intent = Intent(this, EstudiosActivity::class.java)
             startActivity(intent)
         }
+
         val btnCrear = findViewById<Button>(R.id.btnCrearExperiencia)
         val btnMostrar = findViewById<Button>(R.id.btnMostrarExperiencias)
 
         btnCrear.setOnClickListener {
-             Log.d("MainActivity", "Botón Crear clickeado")
+            Log.d("MainActivity", "Botón Crear clickeado")
             crearExperiencia(it)
         }
 
@@ -65,10 +70,7 @@ class ExperienciaActivity: AppCompatActivity() {
             mostrarExperiencias(it)
         }
 
-
-
         mostrarExperiencias()
-
     }
 
     fun crearExperiencia(v: View) {
@@ -181,7 +183,151 @@ class ExperienciaActivity: AppCompatActivity() {
         tvMensaje.text = mensaje
         tvMensaje.setTextColor(if (esError) 0xFFFF0000.toInt() else 0xFF00FF00.toInt())
     }
+    // MÉTODOS PARA EDITAR Y ELIMINAR:
 
+    private fun mostrarDialogoEditarExperiencia(experiencia: ExperienciaDto) {
+        val dialog = android.app.Dialog(this)
+        dialog.setContentView(R.layout.dialog_editar_experiencia)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setCancelable(true)
+
+        val etEmpresa = dialog.findViewById<EditText>(R.id.etEditEmpresa)
+        val etCargo = dialog.findViewById<EditText>(R.id.etEditCargo)
+        val etJefe = dialog.findViewById<EditText>(R.id.etEditJefe)
+        val etTelefono = dialog.findViewById<EditText>(R.id.etEditTelefono)
+        val etActividades = dialog.findViewById<EditText>(R.id.etEditActividades)
+        val etFechaInicio = dialog.findViewById<EditText>(R.id.etEditFechaInicio)
+        val etFechaFin = dialog.findViewById<EditText>(R.id.etEditFechaFin)
+
+        // Llenar campos con datos actuales
+        etEmpresa.setText(experiencia.nomEmpresa)
+        etCargo.setText(experiencia.cargo)
+        etJefe.setText(experiencia.nomJefe)
+        etTelefono.setText(experiencia.telefono)
+        etActividades.setText(experiencia.actividades)
+        etFechaInicio.setText(experiencia.fechaInicio)
+        etFechaFin.setText(experiencia.fechaFinalizacion)
+
+        // Botón Guardar Cambios
+        dialog.findViewById<Button>(R.id.btnGuardarExperiencia).setOnClickListener {
+            val empresa = etEmpresa.text.toString()
+            val cargo = etCargo.text.toString()
+            val jefe = etJefe.text.toString()
+            val telefono = etTelefono.text.toString()
+            val actividades = etActividades.text.toString()
+            val fechaInicio = etFechaInicio.text.toString()
+            val fechaFin = etFechaFin.text.toString()
+
+            if (empresa.isEmpty() || cargo.isEmpty() || jefe.isEmpty() ||
+                telefono.isEmpty() || actividades.isEmpty() || fechaInicio.isEmpty() ||
+                fechaFin.isEmpty()) {
+                android.widget.Toast.makeText(this, "Todos los campos son obligatorios", android.widget.Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidDateFormat(fechaInicio) || !isValidDateFormat(fechaFin)) {
+                android.widget.Toast.makeText(this, "Error: Formato debe ser YYYY-MM-DD", android.widget.Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (fechaFin < fechaInicio) {
+                android.widget.Toast.makeText(this, "Error: La fecha de finalización no puede ser menor a la de inicio", android.widget.Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val experienciaActualizada = experiencia.copy(
+                nomEmpresa = empresa,
+                cargo = cargo,
+                nomJefe = jefe,
+                telefono = telefono,
+                actividades = actividades,
+                fechaInicio = fechaInicio,
+                fechaFinalizacion = fechaFin
+            )
+
+            actualizarExperienciaEnApi(experienciaActualizada)
+            dialog.dismiss()
+        }
+
+        // Botón Eliminar
+        dialog.findViewById<Button>(R.id.btnEliminarExperiencia).setOnClickListener {
+            dialog.dismiss()
+            mostrarDialogoConfirmarEliminacionExperiencia(experiencia)
+        }
+
+        dialog.show()
+    }
+
+    private fun mostrarDialogoConfirmarEliminacionExperiencia(experiencia: ExperienciaDto) {
+        val dialog = android.app.Dialog(this)
+        dialog.setContentView(R.layout.dialog_confirmar_eliminar_experiencia)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setCancelable(true)
+
+        val tvMensajeConfirmacion = dialog.findViewById<TextView>(R.id.tvMensajeConfirmacion)
+        tvMensajeConfirmacion.text = "¿Estás seguro de que deseas eliminar la experiencia: ${experiencia.cargo} en ${experiencia.nomEmpresa}?\n\nEsta acción no se puede deshacer."
+
+        // Botón Cancelar
+        dialog.findViewById<Button>(R.id.btnCancelarEliminar).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        // Botón Confirmar Eliminar
+        dialog.findViewById<Button>(R.id.btnConfirmarEliminar).setOnClickListener {
+            eliminarExperienciaEnApi(experiencia.idExperiencia!!)
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun actualizarExperienciaEnApi(experiencia: ExperienciaDto) {
+        val id = experiencia.idExperiencia ?: return
+
+        // CAMBIA Callback<Void> por Callback<ExperienciaDto>
+        RetrofitInstance.api2kotlin.actualizarExperiencia(id, experiencia).enqueue(object : Callback<ExperienciaDto> {
+            override fun onResponse(call: Call<ExperienciaDto>, response: Response<ExperienciaDto>) {
+                if (response.isSuccessful) {
+                    mostrarMensaje("✓ Experiencia actualizada correctamente", false)
+                    mostrarExperiencias()
+                    Toast.makeText(this@ExperienciaActivity, "Experiencia actualizada", Toast.LENGTH_SHORT).show()
+                } else {
+                    when (response.code()) {
+                        404 -> mostrarMensaje("Error: Experiencia no encontrada", true)
+                        400 -> mostrarMensaje("Error: Datos inválidos", true)
+                        else -> mostrarMensaje("Error al actualizar: ${response.code()}", true)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ExperienciaDto>, t: Throwable) {
+                mostrarMensaje("Error de conexión al actualizar", true)
+            }
+        })
+    }
+
+    private fun eliminarExperienciaEnApi(id: Long) {
+        // PARA ELIMINAR sí usa Callback<Void>
+        RetrofitInstance.api2kotlin.eliminarExperiencia(id).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    mostrarMensaje("✓ Experiencia eliminada correctamente", false)
+                    mostrarExperiencias()
+                    Toast.makeText(this@ExperienciaActivity, "Experiencia eliminada", Toast.LENGTH_SHORT).show()
+                } else {
+                    when (response.code()) {
+                        404 -> mostrarMensaje("Error: Experiencia no encontrada", true)
+                        400 -> mostrarMensaje("Error: No se pudo eliminar la experiencia", true)
+                        else -> mostrarMensaje("Error al eliminar: ${response.code()}", true)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                mostrarMensaje("Error de conexión al eliminar", true)
+            }
+        })
+    }
     private fun limpiarCampos() {
         findViewById<EditText>(R.id.etEmpresa).text.clear()
         findViewById<EditText>(R.id.etCargo).text.clear()
