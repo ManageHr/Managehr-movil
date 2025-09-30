@@ -1,3 +1,10 @@
 <resources>
-	<string name="app_name">AppInterface</string>
+	<string name="app_name">Manage Hr</string>
+	<string-array name="tipos_horas">
+		<item>2 - Diurna</item>
+		<item>3 - Nocturna</item>
+		<item>4 - Dominical/Festivo</item>
+	</string-array>
+	<string name="navigation_drawer_open">Abrir menú</string>
+	<string name="navigation_drawer_close">Cerrar menú</string>
 </resources>

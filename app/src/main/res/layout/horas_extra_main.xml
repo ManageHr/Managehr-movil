@@ -7,25 +7,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#202940"
-        tools:context=".EstudiosActivity">
+        tools:context=".HorasExtraActivity">
 
     <!-- Título -->
+
+    <!-- Descripción -->
     <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Formulario de Estudios"
+            android:layout_marginTop="4dp"
+            android:text="Registro de Horas Extra"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Nombre del Estudio -->
+            app:layout_constraintTop_toTopOf="parent"/>
     <EditText
-            android:id="@+id/etNomEstudio"
+            android:id="@+id/etDescripcion"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -33,18 +33,18 @@
             android:layout_marginEnd="24dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
-            android:hint="Nombre del Estudio"
+            android:hint="Descripción"
             android:inputType="text"
             android:padding="12dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#CCCCCC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@id/textView2" />
 
-    <!-- Institución -->
+    <!-- Fecha (YYYY-MM-DD) -->
     <EditText
-            android:id="@+id/etInstitucion"
+            android:id="@+id/etFecha"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -52,56 +52,35 @@
             android:layout_marginEnd="24dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
-            android:hint="Institución"
-            android:inputType="text"
-            android:padding="12dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#CCCCCC"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etNomEstudio" />
-
-    <!-- Título Obtenido -->
-    <EditText
-            android:id="@+id/etTituloObtenido"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/edittext_background"
-            android:ems="10"
-            android:hint="Título Obtenido"
-            android:inputType="text"
-            android:padding="12dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#CCCCCC"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etInstitucion" />
-
-    <!-- Año de Inicio -->
-    <EditText
-            android:id="@+id/etAnioInicio"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/edittext_background"
-            android:ems="10"
-            android:hint="Fecha Inicio (YYYY-MM-DD)"
+            android:hint="Fecha (YYYY-MM-DD)"
             android:inputType="date"
             android:padding="12dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#CCCCCC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etTituloObtenido" />
+            app:layout_constraintTop_toBottomOf="@id/etDescripcion" />
 
-    <!-- Año de Finalización -->
+    <!-- Tipo de hora (Spinner) -->
+    <Spinner
+            android:id="@+id/spinnerTipoHora"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:popupBackground="#2A2A40"
+            android:entries="@array/tipos_horas"
+            android:textAlignment="viewStart"
+            app:layout_constraintTop_toBottomOf="@id/etFecha"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Cantidad de horas -->
     <EditText
-            android:id="@+id/etAnioFin"
+            android:id="@+id/etCantidadHoras"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -109,20 +88,59 @@
             android:layout_marginEnd="24dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
-            android:hint="Fecha Fin (YYYY-MM-DD)"
-            android:inputType="date"
+            android:hint="Cantidad de horas (1-24)"
+            android:inputType="number"
             android:padding="12dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#CCCCCC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etAnioInicio" />
+            app:layout_constraintTop_toBottomOf="@id/spinnerTipoHora" />
+
+    <!-- Estado (0/1) -->
+    <EditText
+            android:id="@+id/etEstado"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/edittext_background"
+            android:ems="10"
+            android:hint="Estado (0 inactivo / 1 activo)"
+            android:inputType="number"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etCantidadHoras" />
+
+    <!-- Contrato (ID) -->
+    <EditText
+            android:id="@+id/etContratoId"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/edittext_background"
+            android:ems="10"
+            android:hint="Contrato (ID)"
+            android:inputType="number"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etEstado" />
 
     <!-- Botones -->
+
     <Button
-            android:id="@+id/btnCrearEstudio"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:id="@+id/btnCrearHoras"
+            android:layout_width="121dp"
+            android:layout_height="37dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="12dp"
@@ -132,14 +150,13 @@
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/btnMostrarEstudios"
+            app:layout_constraintEnd_toStartOf="@id/btnMostrarHoras"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etAnioFin" />
-
+            app:layout_constraintTop_toBottomOf="@id/etContratoId"/>
     <Button
-            android:id="@+id/btnMostrarEstudios"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:id="@+id/btnMostrarHoras"
+            android:layout_width="114dp"
+            android:layout_height="38dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="24dp"
@@ -150,16 +167,18 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnCrearEstudio"
-            app:layout_constraintTop_toBottomOf="@+id/etAnioFin" />
+            app:layout_constraintStart_toEndOf="@id/btnCrearHoras"
+            app:layout_constraintTop_toBottomOf="@id/etContratoId"/>
 
     <!-- Mensaje -->
+
+    <!-- RecyclerView para Horas Extra -->
     <TextView
             android:id="@+id/tvMensaje"
             android:layout_width="137dp"
             android:layout_height="66dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="48dp"
             android:background="@drawable/textview_background"
             android:padding="12dp"
             android:text="Resultado aparecerá aquí"
@@ -167,39 +186,19 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnCrearEstudio"
-            app:layout_constraintHorizontal_bias="0.896"/>
-
-    <!-- RecyclerView para Estudios -->
+            app:layout_constraintTop_toBottomOf="@id/btnCrearHoras"
+            app:layout_constraintHorizontal_bias="0.904"/>
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecyEstudios"
+            android:id="@+id/RecyHorasExtra"
             android:layout_width="185dp"
             android:layout_height="173dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="60dp"
             android:background="@drawable/table_background"
-            app:layout_constraintBottom_toTopOf="@+id/buttonSiguienteActividad"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvMensaje"
+            app:layout_constraintTop_toTopOf="@id/tvMensaje"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.0"/>
-
-    <!-- Botón siguiente actividad -->
-    <Button
-            android:id="@+id/buttonSiguienteActividad"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/button_background"
-            android:text="NEXT"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:onClick="irHojas"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
+            app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

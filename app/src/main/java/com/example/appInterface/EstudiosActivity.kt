@@ -20,7 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class EstudiosActivity : AppCompatActivity() {
+class EstudiosActivity : BaseActivity() {
 
     private lateinit var adapter: EstudiosAdapter
     private lateinit var recyclerView: RecyclerView
@@ -32,7 +32,7 @@ class EstudiosActivity : AppCompatActivity() {
         enableEdgeToEdge()
 
 
-        setContentView(R.layout.estudios_main) // ← Si este es el nombre correcto
+        setModuleContent(R.layout.estudios_main) // ← Si este es el nombre correcto
 
 
 
@@ -67,7 +67,7 @@ class EstudiosActivity : AppCompatActivity() {
         }
 
         buttonSiguiente.setOnClickListener {
-            val intent = Intent(this, ProductosActivity::class.java)
+            val intent = Intent(this, HojasvidaActivity::class.java)
             startActivity(intent)
         }
 
@@ -119,7 +119,10 @@ class EstudiosActivity : AppCompatActivity() {
     private fun isValidDateFormat(date: String): Boolean {
         return date.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))
     }
-
+    fun irHojas(view: View) {
+        val intent = Intent(this, HojasvidaActivity::class.java)
+        startActivity(intent)
+    }
     private fun crearEstudioEnApi(estudio: EstudiosDto) {
         println("EstudiosActivity: Creando estudio...")
 

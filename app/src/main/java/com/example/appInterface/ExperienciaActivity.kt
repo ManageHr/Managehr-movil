@@ -1,26 +1,27 @@
 package com.example.appinterface
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import android.annotation.SuppressLint
-import android.content.Intent
-import android.util.Log
-import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appinterface.Adapter.ExperienciaAdapter
-import com.example.appinterface.Models.ExperienciaDto
 import com.example.appinterface.Api.RetrofitInstance
+import com.example.appinterface.Models.ExperienciaDto
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
-
+class ExperienciaActivity: BaseActivity() {
     private lateinit var adapter: ExperienciaAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvMensaje: TextView
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setModuleContent(R.layout.activity_experiencia)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -48,14 +49,14 @@ class MainActivity : AppCompatActivity() {
 
         val buttonGoToSecondActivity: Button = findViewById(R.id.buttonSegundaActividad)
         buttonGoToSecondActivity.setOnClickListener {
-            val intent = Intent(this, ProductosActivity::class.java)
+            val intent = Intent(this, EstudiosActivity::class.java)
             startActivity(intent)
         }
         val btnCrear = findViewById<Button>(R.id.btnCrearExperiencia)
         val btnMostrar = findViewById<Button>(R.id.btnMostrarExperiencias)
 
         btnCrear.setOnClickListener {
-            Log.d("MainActivity", "Botón Crear clickeado")
+             Log.d("MainActivity", "Botón Crear clickeado")
             crearExperiencia(it)
         }
 
@@ -64,12 +65,6 @@ class MainActivity : AppCompatActivity() {
             mostrarExperiencias(it)
         }
 
-        buttonGoToSecondActivity.setOnClickListener {
-            val intent = Intent(this, ProductosActivity::class.java)
-            startActivity(intent)
-        }
-
-        Log.d("MainActivity", "Configuración completada")
 
 
         mostrarExperiencias()
@@ -140,7 +135,10 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
+    fun irEstudios(view: View) {
+        val intent = Intent(this, EstudiosActivity::class.java)
+        startActivity(intent)
+    }
     fun mostrarExperiencias(v: View? = null) {
         println("MainActivity: Solicitando experiencias...")
 
