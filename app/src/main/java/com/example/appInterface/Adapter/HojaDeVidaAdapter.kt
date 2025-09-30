@@ -8,29 +8,41 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appinterface.Models.HojaDeVidaDto
 import com.example.appinterface.R
 
-class HojaDeVidaAdapter : RecyclerView.Adapter<HojaDeVidaAdapter.HojaDeVidaViewHolder>() {
+class HojaDeVidaAdapter(
+    private var hojasDeVida: List<HojaDeVidaDto> = emptyList(),
+    private val onItemClick: (HojaDeVidaDto) -> Unit = {}
+) : RecyclerView.Adapter<HojaDeVidaAdapter.HojaDeVidaViewHolder>() {
 
     private var hojas: List<HojaDeVidaDto> = emptyList()
 
-    class HojaDeVidaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class HojaDeVidaViewHolder(itemView: View, private val onItemClick: (HojaDeVidaDto) -> Unit) : RecyclerView.ViewHolder(itemView) {
         val tvId: TextView = itemView.findViewById(R.id.tvId)
         val tvClaseLibreta: TextView = itemView.findViewById(R.id.tvClaseLibreta)
         val tvNumeroLibreta: TextView = itemView.findViewById(R.id.tvNumeroLibreta)
         val tvUsuarioNumDocumento: TextView = itemView.findViewById(R.id.tvUsuarioNumDocumento)
+
+        fun bind(hoja: HojaDeVidaDto) {
+            tvId.text = "ID: ${hoja.idHojaDeVida?.toString() ?: "N/A"}"
+            tvClaseLibreta.text = "Clase: ${hoja.claseLibretaMilitar}"
+            tvNumeroLibreta.text = "Número: ${hoja.numeroLibretaMilitar}"
+            tvUsuarioNumDocumento.text = "Documento: ${hoja.usuarioNumDocumento}"
+
+            // Agregar el clic aquí
+            itemView.setOnClickListener {
+                onItemClick(hoja)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HojaDeVidaViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_hojavida, parent, false)
-        return HojaDeVidaViewHolder(view)
+        return HojaDeVidaViewHolder(view, onItemClick)
     }
 
     override fun onBindViewHolder(holder: HojaDeVidaViewHolder, position: Int) {
         val hoja = hojas[position]
-        holder.tvId.text = hoja.idHojaDeVida?.toString() ?: "N/A"
-        holder.tvClaseLibreta.text = hoja.claseLibretaMilitar
-        holder.tvNumeroLibreta.text = hoja.numeroLibretaMilitar
-        holder.tvUsuarioNumDocumento.text = hoja.usuarioNumDocumento.toString()
+        holder.bind(hoja) // Usar el método bind en lugar de asignar directamente
     }
 
     override fun getItemCount(): Int = hojas.size
