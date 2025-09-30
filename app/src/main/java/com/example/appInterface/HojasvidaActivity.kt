@@ -15,6 +15,7 @@ import com.example.appinterface.Api.RetrofitInstance
 import com.example.appinterface.Models.HojaDeVidaDto
 
 class HojasvidaActivity: BaseActivity() {
+    override val selfMenuItemId: Int = R.id.nav_hojasvida
     private lateinit var adapter: HojaDeVidaAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvMensaje: TextView

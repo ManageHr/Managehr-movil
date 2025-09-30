@@ -1,10 +1,7 @@
 package com.example.appinterface.Api
 
 import com.example.appinterface.LoginActivity
-import com.example.appinterface.Models.EstudiosDto
-import com.example.appinterface.Models.ExperienciaDto
-import com.example.appinterface.Models.HojaDeVidaDto
-import com.example.appinterface.Models.HorasExtraDto
+import com.example.appinterface.Models.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -37,4 +34,17 @@ interface ApiServicesKotlin {
 
     @GET("api/horasextra")
     fun obtenerHorasExtra(): Call<List<HorasExtraDto>>
+
+    @POST("api/incapacidades")
+    fun crearIncapacidad(@Body dto: IncapacidadesDto): Call<Void>
+
+    @GET("api/incapacidades")
+    fun obtenerIncapacidades(): Call<List<IncapacidadesDto>>
+
+    @POST("api/vacaciones")
+    fun crearVacaciones(@Body dto: VacacionesDto): Call<Void>
+
+    @GET("api/vacaciones")
+    fun obtenerVacaciones(): Call<List<VacacionesDto>>
+
 }
