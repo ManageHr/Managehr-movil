@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#202940"
+            android:padding="16dp"
+            tools:context="com.example.appinterface.UsuariosActivity">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <!-- Título -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gestión de Usuarios"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="20dp" />
+
+        <!-- SECCIÓN: DOCUMENTO Y TIPO -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Información de Documento"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+        <EditText
+                android:id="@+id/etNumDocumento"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Número de Documento *"
+                android:background="@drawable/edittext_background"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:inputType="number"
+                android:layout_marginBottom="8dp"/>
+
+        <!-- SECCIÓN: NOMBRES -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombres"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+        <EditText
+                android:id="@+id/etPrimerNombre"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Primer Nombre *"
+                android:background="@drawable/edittext_background"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:layout_marginBottom="8dp"/>
+
+        <EditText
+                android:id="@+id/etSegundoNombre"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Segundo Nombre"
+                android:background="@drawable/edittext_background"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:layout_marginBottom="8dp"/>
+
+        <!-- SECCIÓN: APELLIDOS -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apellidos"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+        <EditText
+                android:id="@+id/etPrimerApellido"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Primer Apellido *"
+                android:background="@drawable/edittext_background"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:layout_marginBottom="8dp"/>
+
+        <EditText
+                android:id="@+id/etSegundoApellido"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Segundo Apellido"
+                android:background="@drawable/edittext_background"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"/>
+
+        <!-- SECCIÓN: INFORMACIÓN PERSONAL -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Información Personal"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+        <EditText
+                android:id="@+id/etFechaNac"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Fecha Nacimiento (YYYY-MM-DD) *"
+                android:background="@drawable/edittext_background"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:layout_marginBottom="8dp"/>
+
+        <EditText
+                android:id="@+id/etNumHijos"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Número de Hijos"
+                android:background="@drawable/edittext_background"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:inputType="number"
+                android:layout_marginBottom="16dp"/>
+
+        <!-- SECCIÓN: CONTACTO -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Información de Contacto"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+        <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Email *"
+                android:background="@drawable/edittext_background"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:inputType="textEmailAddress"
+                android:layout_marginBottom="8dp"/>
+
+        <EditText
+                android:id="@+id/etTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Teléfono *"
+                android:background="@drawable/edittext_background"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:inputType="phone"
+                android:layout_marginBottom="8dp"/>
+
+        <EditText
+                android:id="@+id/etDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Dirección *"
+                android:background="@drawable/edittext_background"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"/>
+
+        <!-- SECCIÓN: CONTACTO DE EMERGENCIA -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contacto de Emergencia"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+        <EditText
+                android:id="@+id/etContactoEmergencia"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Nombre Contacto Emergencia *"
+                android:background="@drawable/edittext_background"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:layout_marginBottom="8dp"/>
+
+        <EditText
+                android:id="@+id/etNumContactoEmergencia"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Teléfono Contacto Emergencia *"
+                android:background="@drawable/edittext_background"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:inputType="phone"
+                android:layout_marginBottom="16dp"/>
+
+        <!-- SECCIÓN: CONTRASEÑA -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contraseña"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+        <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Contraseña *"
+                android:background="@drawable/edittext_background"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:inputType="textPassword"
+                android:layout_marginBottom="20dp"/>
+
+        <!-- BOTONES -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginBottom="20dp">
+
+            <Button
+                    android:id="@+id/btnCrearUsuario"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/button_background"
+                    android:text="Crear Usuario"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"/>
+
+            <Button
+                    android:id="@+id/btnMostrarUsuarios"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/button_background"
+                    android:text="Mostrar Usuarios"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <!-- RecyclerView para mostrar usuarios -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lista de Usuarios"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="8dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecyUsuarios"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@drawable/table_background"
+                android:padding="8dp"
+                android:layout_marginBottom="16dp"/>
+
+        <!-- Mensaje de resultado -->
+        <TextView
+                android:id="@+id/tvMensaje"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textview_background"
+                android:padding="12dp"
+                android:text="Resultado aparecerá aquí"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:gravity="center"/>
+
+    </LinearLayout>
+
+</ScrollView>

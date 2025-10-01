@@ -45,6 +45,8 @@
 		<activity android:name=".VacacionesActivity"
 				  android:exported="true"/>
 
+		<activity
+				android:name=".UsuariosActivity" android:exported="true"/>
 		<!-- Otras activities sin launcher... -->
 		<!-- <activity android:name=".ProductosActivity" android:exported="true" /> -->
 
