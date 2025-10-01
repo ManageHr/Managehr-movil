@@ -9,7 +9,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.appInterface.HojasvidaActivity
 import com.example.appinterface.Api.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
@@ -92,7 +91,7 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(this@LoginActivity, "Login exitoso", Toast.LENGTH_SHORT).show()
 
 
-                            val intent = Intent(this@LoginActivity, HojasvidaActivity::class.java)
+                            val intent = Intent(this@LoginActivity, UsuariosActivity::class.java)
                             startActivity(intent)
                             finish()
                         } else {

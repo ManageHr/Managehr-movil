@@ -1,10 +1,9 @@
 package com.example.appinterface.Api
 
+import com.example.appInterface.Models.UsuarioDto
 import com.example.appinterface.LoginActivity
-import com.example.appinterface.Models.EstudiosDto
-import com.example.appinterface.Models.ExperienciaDto
-import com.example.appinterface.Models.HojaDeVidaDto
-import com.example.appinterface.Models.HorasExtraDto
+import com.example.appinterface.Models.*
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -54,5 +53,31 @@ interface ApiServicesKotlin {
     @GET("api/horasextra")
     fun obtenerHorasExtra(): Call<List<HorasExtraDto>>
 
+    @GET("api/usuarios")
+    fun obtenerUsuarios(): Call<List<UsuarioDto>>
+
+    @POST("api/usuarios")
+    fun crearUsuario(@Body usuario: UsuarioDto): Call<Void>
+
+    @PUT("api/usuarios/{id}")
+    fun actualizarUsuario(@Path("id") id: Long, @Body usuario: UsuarioDto): Call<Void>
+
+    @DELETE("api/usuarios/{id}")
+    fun eliminarUsuario(@Path("id") id: Long): Call<Void>
+
+    @POST("api/users")
+    fun crearUser(@Body userDto: UserDto): Call<ResponseBody>
+
+    @GET("/api/users/email/{email}")
+    fun obtenerUserPorEmail(@Path("email") email: String): Call<UserDto>
+
+    @GET("/api/users/{id}")
+    fun obtenerUserPorId(@Path("id") id: Long): Call<UserDto>
+
+    @PUT("/api/users/{id}")
+    fun actualizarUser(@Path("id") id: Long, @Body userDto: UserDto): Call<String>
+
+    @DELETE("/api/users/{id}")
+    fun eliminarUser(@Path("id") id: Long): Call<String>
 
 }
