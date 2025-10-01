@@ -73,15 +73,6 @@ interface ApiServicesKotlin {
     @GET("/api/users/email/{email}")
     fun obtenerUserPorEmail(@Path("email") email: String): Call<UserDto>
 
-    @GET("/api/users/{id}")
-    fun obtenerUserPorId(@Path("id") id: Long): Call<UserDto>
-
-    @PUT("/api/users/{id}")
-    fun actualizarUser(@Path("id") id: Long, @Body userDto: UserDto): Call<String>
-
-    @DELETE("/api/users/{id}")
-    fun eliminarUser(@Path("id") id: Long): Call<String>
-
     @POST("api/incapacidades")
     fun crearIncapacidad(@Body dto: IncapacidadesDto): Call<Void>
 
@@ -93,6 +84,12 @@ interface ApiServicesKotlin {
 
     @GET("api/vacaciones")
     fun obtenerVacaciones(): Call<List<VacacionesDto>>
+
+    @PUT("api/vacaciones/{id}")
+    fun actualizarVacacion(@Path("id") id: Long, @Body vacacion: VacacionesDto): Call<ResponseBody>
+
+    @DELETE("api/vacaciones/{id}")
+    fun eliminarVacacion(@Path("id") id:Long): Call<Void>
 
 
 }

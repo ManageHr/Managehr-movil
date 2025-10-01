@@ -8,8 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appinterface.Models.VacacionesDto
 import com.example.appinterface.R
+import com.example.appinterface.VacacionesActivity
 
-class VacacionesAdapter : RecyclerView.Adapter<VacacionesAdapter.VacacionViewHolder>() {
+class VacacionesAdapter(
+    private val vacacionesList: List<VacacionesDto>,
+    private val onItemClick:(VacacionesDto)->Unit
+) : RecyclerView.Adapter<VacacionesAdapter.VacacionViewHolder>() {
 
     private var items: List<VacacionesDto> = emptyList()
 
@@ -34,6 +38,9 @@ class VacacionesAdapter : RecyclerView.Adapter<VacacionesAdapter.VacacionViewHol
         h.tvDias.text     = "${v.dias ?: 0} días"
         h.tvEstado.text   = v.estado ?: "Pendiente"
         h.tvContrato.text = "Contrato: ${v.contratoId}"
+        h.itemView.setOnClickListener {
+            onItemClick(v)
+        }
     }
 
     override fun getItemCount(): Int = items.size

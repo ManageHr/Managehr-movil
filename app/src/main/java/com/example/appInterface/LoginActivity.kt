@@ -69,33 +69,44 @@ class LoginActivity : AppCompatActivity() {
         if (validarCampos(email, password)) {
             val loginRequest = LoginRequest(email, password)
 
-
             btnLogin.isEnabled = false
             btnLogin.text = "Cargando..."
 
             RetrofitInstance.api2kotlin.login(loginRequest).enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-
                     btnLogin.isEnabled = true
                     btnLogin.text = "Iniciar Sesión"
 
                     if (response.isSuccessful) {
                         val loginResponse = response.body()
                         val token = loginResponse?.token ?: ""
+                        val user = loginResponse?.user
 
-                        if (token.isNotEmpty()) {
+                        if (token.isNotEmpty() && user != null) {
+                            // VERIFICAR SI EL USUARIO TIENE ROL = "1" (ADMIN)
+                            if (user.rol == "1") {
+                                RetrofitInstance.setAuthToken(token)
+                                saveAuthToken(token)
 
-                            RetrofitInstance.setAuthToken(token)
-                            saveAuthToken(token)
+                                Toast.makeText(this@LoginActivity, "Login exitoso", Toast.LENGTH_SHORT).show()
 
-                            Toast.makeText(this@LoginActivity, "Login exitoso", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this@LoginActivity, UsuariosActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                // USUARIO NO TIENE PERMISOS DE ADMIN
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "Acceso denegado: No tiene permisos para ingresar",
+                                    Toast.LENGTH_LONG
+                                ).show()
 
-
-                            val intent = Intent(this@LoginActivity, UsuariosActivity::class.java)
-                            startActivity(intent)
-                            finish()
+                                // SOLO ELIMINA ESTAS 2 LÍNEAS O COMENTA:
+                                // RetrofitInstance.clearAuthToken()
+                                // clearAuthToken()
+                            }
                         } else {
-                            Toast.makeText(this@LoginActivity, "Error: Token vacío", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@LoginActivity, "Error: Token vacío o usuario no encontrado", Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         val errorMessage = when (response.code()) {
@@ -109,7 +120,6 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-
                     btnLogin.isEnabled = true
                     btnLogin.text = "Iniciar Sesión"
 
@@ -118,7 +128,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         } else {
-
             btnLogin.isEnabled = true
             btnLogin.text = "Iniciar Sesión"
         }
