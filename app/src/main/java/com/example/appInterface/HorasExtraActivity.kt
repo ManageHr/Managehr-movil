@@ -1,6 +1,7 @@
 package com.example.appinterface
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -53,7 +54,9 @@ class HorasExtraActivity : BaseActivity() {
 
         recyclerView = findViewById(R.id.RecyHorasExtra)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = HorasExtraAdapter()
+        adapter = HorasExtraAdapter { horasExtra ->
+            mostrarDialogoEditarHorasExtra(horasExtra)
+        }
         recyclerView.adapter = adapter
 
         val btnCrear = findViewById<Button>(R.id.btnCrearHoras)
@@ -219,5 +222,129 @@ class HorasExtraActivity : BaseActivity() {
         findViewById<EditText>(R.id.etEstado).text?.clear()
         findViewById<EditText>(R.id.etContratoId).text?.clear()
         spinnerTipoHora.setSelection(0)
+    }
+    private fun mostrarDialogoEditarHorasExtra(horasExtra: HorasExtraDto) {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_editar_horasextra)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setCancelable(true)
+
+        // Referencias a los campos del diálogo
+        val etDescripcion = dialog.findViewById<EditText>(R.id.etDescripcion)
+        val etFecha = dialog.findViewById<EditText>(R.id.etFecha)
+        val etCantidadHoras = dialog.findViewById<EditText>(R.id.etCantidadHoras)
+        val etEstado = dialog.findViewById<EditText>(R.id.etEstado)
+        val etContratoId = dialog.findViewById<EditText>(R.id.etContratoId)
+
+        // Rellenar con datos existentes
+        etDescripcion.setText(horasExtra.descripcion)
+        etFecha.setText(horasExtra.fecha)
+        etCantidadHoras.setText(horasExtra.nHorasExtra.toString())
+        etEstado.setText(horasExtra.estado.toString())
+        etContratoId.setText(horasExtra.contratoId.toString())
+
+        // Botón guardar cambios
+        dialog.findViewById<Button>(R.id.btnGuardarCambios).setOnClickListener {
+            val nuevaDescripcion = etDescripcion.text.toString()
+            val nuevaFecha = etFecha.text.toString()
+            val nuevaCantidad = etCantidadHoras.text.toString().toIntOrNull()
+            val nuevoEstado = etEstado.text.toString().toIntOrNull()
+            val nuevoContratoId = etContratoId.text.toString().toIntOrNull()
+
+            if (nuevaDescripcion.isEmpty() || nuevaFecha.isEmpty() || nuevaCantidad == null ||
+                nuevoEstado == null || nuevoContratoId == null) {
+                Toast.makeText(this, "Complete todos los campos correctamente", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidDateFormat(nuevaFecha)) {
+                Toast.makeText(this, "Formato de fecha debe ser YYYY-MM-DD", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val horasExtraActualizada = horasExtra.copy(
+                descripcion = nuevaDescripcion,
+                fecha = nuevaFecha,
+                nHorasExtra = nuevaCantidad,
+                estado = nuevoEstado,
+                contratoId = nuevoContratoId
+            )
+
+            actualizarHorasExtraEnApi(horasExtraActualizada)
+            dialog.dismiss()
+        }
+
+        // Botón eliminar
+        dialog.findViewById<Button>(R.id.btnEliminarHorasExtra).setOnClickListener {
+            dialog.dismiss()
+            mostrarDialogoConfirmarEliminacion(horasExtra)
+        }
+
+        // Botón cancelar
+        dialog.findViewById<Button>(R.id.btnCancelar).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun mostrarDialogoConfirmarEliminacion(horasExtra: HorasExtraDto) {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_confirmar_eliminar_horasextra)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setCancelable(true)
+
+        val tvMensaje = dialog.findViewById<TextView>(R.id.tvMensajeConfirmacion)
+        tvMensaje.text = "¿Estás seguro de que deseas eliminar las horas extra del contrato: ${horasExtra.contratoId}?\n\nFecha: ${horasExtra.fecha}\nHoras: ${horasExtra.nHorasExtra}"
+
+        dialog.findViewById<Button>(R.id.btnCancelarEliminar).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.findViewById<Button>(R.id.btnConfirmarEliminar).setOnClickListener {
+            horasExtra.idHorasExtra?.let { id ->
+                eliminarHorasExtraEnApi(id)
+            } ?: run {
+                Toast.makeText(this, "ID de horas extra no válido", Toast.LENGTH_SHORT).show()
+            }
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun actualizarHorasExtraEnApi(horasExtra: HorasExtraDto) {
+        horasExtra.idHorasExtra?.let { id ->
+            RetrofitInstance.api2kotlin.actualizarHorasExtra(id, horasExtra).enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@HorasExtraActivity, "Horas extra actualizadas", Toast.LENGTH_SHORT).show()
+                        mostrarHorasExtra()
+                    } else {
+                        Toast.makeText(this@HorasExtraActivity, "Error en actualización: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Toast.makeText(this@HorasExtraActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+    }
+
+    private fun eliminarHorasExtraEnApi(id: Long) {
+        RetrofitInstance.api2kotlin.eliminarHorasExtra(id).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(this@HorasExtraActivity, "Horas extra eliminadas", Toast.LENGTH_SHORT).show()
+                    mostrarHorasExtra()
+                } else {
+                    Toast.makeText(this@HorasExtraActivity, "Error al eliminar: ${response.code()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(this@HorasExtraActivity, "Error de conexión", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

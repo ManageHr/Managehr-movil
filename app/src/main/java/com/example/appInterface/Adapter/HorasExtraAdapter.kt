@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appinterface.Models.HorasExtraDto
 import com.example.appinterface.R
 
-class HorasExtraAdapter :
-    ListAdapter<HorasExtraDto, HorasExtraAdapter.VH>(Diff) {
+class HorasExtraAdapter (
+    private val onItemClick: (HorasExtraDto) -> Unit
+) : ListAdapter<HorasExtraDto, HorasExtraAdapter.VH>(Diff) {
 
     object Diff : DiffUtil.ItemCallback<HorasExtraDto>() {
         override fun areItemsTheSame(old: HorasExtraDto, new: HorasExtraDto) =
@@ -44,5 +45,8 @@ class HorasExtraAdapter :
         holder.tvTipo.text = "Tipo: ${it.tipoHorasId}"
         holder.tvEstado.text = if (it.estado == 1) "Activo" else "Inactivo"
         holder.tvContrato.text = "Contrato: ${it.contratoId}"
+        holder.itemView.setOnClickListener {_ ->
+            onItemClick(it)
+        }
     }
 }

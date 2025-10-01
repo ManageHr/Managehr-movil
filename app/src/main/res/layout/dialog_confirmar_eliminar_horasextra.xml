@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="24dp"
+              android:background="#202940">
+
+    <TextView
+            android:id="@+id/tvMensajeConfirmacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="¿Estás seguro de que deseas eliminar estas horas extra?"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+        <Button
+                android:id="@+id/btnCancelarEliminar"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/button_background"
+                android:text="Cancelar"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+        <Button
+                android:id="@+id/btnConfirmarEliminar"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/button_background_red"
+                android:text="Eliminar"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+    </LinearLayout>
+</LinearLayout>
