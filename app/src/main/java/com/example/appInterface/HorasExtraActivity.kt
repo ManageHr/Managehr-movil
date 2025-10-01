@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog
 
 // ⬇️ Cambiado: ahora hereda de BaseActivity
 class HorasExtraActivity : BaseActivity() {
+    override val selfMenuItemId: Int = R.id.nav_horas_extra
 
     // --------- Campos de UI ---------
     private lateinit var tvMensaje: TextView

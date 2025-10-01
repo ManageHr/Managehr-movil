@@ -17,7 +17,6 @@
 			android:theme="@style/Theme.AppInterface"
 			tools:targetApi="31">
 
-		<!-- Pantalla de inicio: SOLO el login tiene el LAUNCHER -->
 		<activity
 				android:name=".LoginActivity"
 				android:exported="true">
@@ -40,6 +39,11 @@
 		<activity
 				android:name="com.example.appInterface.HojasvidaActivity"
 				android:exported="false" />
+		<activity android:name=".IncapacidadesActivity"
+				  android:exported="true"/>
+
+		<activity android:name=".VacacionesActivity"
+				  android:exported="true"/>
 
 		<!-- Otras activities sin launcher... -->
 		<!-- <activity android:name=".ProductosActivity" android:exported="true" /> -->

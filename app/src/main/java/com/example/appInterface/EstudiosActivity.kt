@@ -21,7 +21,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class EstudiosActivity : BaseActivity() {
-
+    override val selfMenuItemId: Int = R.id.nav_estudios
     private lateinit var adapter: EstudiosAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvMensaje: TextView
