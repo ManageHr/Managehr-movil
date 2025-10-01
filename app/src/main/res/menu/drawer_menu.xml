@@ -1,33 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_usuarios"       android:icon="@drawable/ic_person"       android:title="Usuarios"/>
+        <item android:id="@+id/nav_hojasvida"      android:icon="@drawable/ic_description"  android:title="Hojas de vida"/>
+        <item android:id="@+id/nav_estudios"       android:icon="@drawable/study"           android:title="Estudios"/>
+        <item android:id="@+id/nav_vacaciones"     android:icon="@drawable/vacaciones"      android:title="Vacaciones"/>
+        <item android:id="@+id/nav_horas_extra"    android:icon="@drawable/tiempo_extra"    android:title="Horas Extra"/>
+        <item android:id="@+id/nav_incapacidades"  android:icon="@drawable/incapacidad"     android:title="Incapacidades"/>
+    </group>
+
+    <!-- Logout con ACTION LAYOUT (usar 'app:' no 'android:') -->
     <item
-            android:id="@+id/nav_usuarios"
-            android:icon="@drawable/ic_person"
-            android:title="Usuarios" />
-
-    <item
-            android:id="@+id/nav_hojasvida"
-            android:icon="@drawable/ic_description"
-            android:title="Hojas de vida" />
-
-    <item
-            android:id="@+id/nav_estudios"
-            android:title="Estudios" />
-
-    <item
-            android:title="Permisos" />
-
-    <item
-            android:id="@+id/nav_vacaciones"
-            android:title="Vacaciones" />
-
-    <item
-            android:id="@+id/nav_horas_extra"
-            android:title="Horas Extra" />
-
-    <item
-            android:id="@+id/nav_incapacidades"
-            android:title="Incapacidades" />
-
+            android:id="@+id/nav_logout"
+            android:title=""
+            android:checkable="false"
+            android:enabled="false"
+            android:icon="@null"
+            android:orderInCategory="100"
+            app:actionLayout="@layout/menu_logout_item"/>
 </menu>

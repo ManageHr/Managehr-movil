@@ -19,7 +19,6 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:title="@string/app_name" />
 
-        <!-- aquí se inyecta el layout de cada módulo -->
         <FrameLayout
                 android:id="@+id/content_container"
                 android:layout_width="match_parent"
@@ -33,6 +32,10 @@
             android:layout_gravity="start"
             android:background="@color/menu_background"
             app:itemBackground="@drawable/nav_item_background"
-            app:itemTextColor="@color/nav_item_tint"
+            app:itemTextColor="@color/nav_item_text"
+            app:itemIconTint="@color/nav_item_icon"
+            app:itemIconSize="22dp"
+            app:itemHorizontalPadding="24dp"
+            app:itemIconPadding="12dp"
             app:menu="@menu/drawer_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>

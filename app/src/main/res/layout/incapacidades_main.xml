@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#202940">
+
+    <TextView
+            android:id="@+id/titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registro de Incapacidades"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"/>
+
+    <!-- Botón para seleccionar archivo -->
+    <Button
+            android:id="@+id/btnSeleccionarArchivo"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:text="Seleccionar archivo"
+            android:background="@drawable/button_background"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            app:layout_constraintTop_toBottomOf="@id/titulo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="16dp"/>
+
+    <!-- Muestra la URI/nombre del archivo elegido -->
+    <TextView
+            android:id="@+id/tvArchivoSeleccionado"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Ningún archivo seleccionado"
+            android:textColor="#CCCCCC"
+            app:layout_constraintTop_toBottomOf="@id/btnSeleccionarArchivo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="8dp"/>
+
+    <EditText
+            android:id="@+id/etFechaInicio"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:hint="Fecha inicio (YYYY-MM-DD)"
+            android:inputType="date"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            android:background="@drawable/edittext_background"
+            app:layout_constraintTop_toBottomOf="@id/tvArchivoSeleccionado"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="12dp"/>
+
+    <EditText
+            android:id="@+id/etFechaFinal"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:hint="Fecha final (YYYY-MM-DD)"
+            android:inputType="date"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            android:background="@drawable/edittext_background"
+            app:layout_constraintTop_toBottomOf="@id/etFechaInicio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="12dp"/>
+
+    <EditText
+            android:id="@+id/etContratoId"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:hint="Contrato (ID)"
+            android:inputType="number"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            android:background="@drawable/edittext_background"
+            app:layout_constraintTop_toBottomOf="@id/etFechaFinal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="12dp"/>
+
+    <Button
+            android:id="@+id/btnCrearIncapacidad"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:text="Crear"
+            android:background="@drawable/button_background"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            app:layout_constraintTop_toBottomOf="@id/etContratoId"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnMostrarIncapacidades"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"/>
+
+    <Button
+            android:id="@+id/btnMostrarIncapacidades"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:text="Mostrar"
+            android:background="@drawable/button_background"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            app:layout_constraintTop_toBottomOf="@id/etContratoId"
+            app:layout_constraintStart_toEndOf="@id/btnCrearIncapacidad"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="16dp"/>
+
+    <TextView
+            android:id="@+id/tvMensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resultado aquí"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/btnCrearIncapacidad"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyIncapacidades"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/table_background"
+            app:layout_constraintTop_toBottomOf="@id/tvMensaje"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="24dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

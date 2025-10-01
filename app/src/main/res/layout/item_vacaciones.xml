@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:padding="12dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#1E263B">
+
+    <!-- Fechas: 2025-05-24 → 2025-05-30 -->
+    <TextView
+            android:id="@+id/itemFechas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2025-05-24 → 2025-05-30"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
+
+    <!-- Motivo -->
+    <TextView
+            android:id="@+id/itemMotivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Motivo..."
+            android:textColor="#DDFFFFFF"
+            android:layout_marginTop="2dp"/>
+
+    <!-- Días -->
+    <TextView
+            android:id="@+id/itemDias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7 días"
+            android:textColor="#B0FFFFFF"
+            android:layout_marginTop="2dp"/>
+
+    <!-- Estado -->
+    <TextView
+            android:id="@+id/itemEstado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pendiente"
+            android:textColor="#82E082"
+            android:layout_marginTop="2dp"/>
+
+    <!-- Contrato -->
+    <TextView
+            android:id="@+id/itemContrato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contrato: 2"
+            android:textColor="#9EC1FF"
+            android:layout_marginTop="2dp"/>
+</LinearLayout>

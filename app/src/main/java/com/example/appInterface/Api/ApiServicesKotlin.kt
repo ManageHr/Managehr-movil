@@ -3,7 +3,9 @@ package com.example.appinterface.Api
 import com.example.appInterface.Models.UsuarioDto
 import com.example.appinterface.LoginActivity
 import com.example.appinterface.Models.*
+
 import okhttp3.ResponseBody
+
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -79,5 +81,18 @@ interface ApiServicesKotlin {
 
     @DELETE("/api/users/{id}")
     fun eliminarUser(@Path("id") id: Long): Call<String>
+
+    @POST("api/incapacidades")
+    fun crearIncapacidad(@Body dto: IncapacidadesDto): Call<Void>
+
+    @GET("api/incapacidades")
+    fun obtenerIncapacidades(): Call<List<IncapacidadesDto>>
+
+    @POST("api/vacaciones")
+    fun crearVacaciones(@Body dto: VacacionesDto): Call<Void>
+
+    @GET("api/vacaciones")
+    fun obtenerVacaciones(): Call<List<VacacionesDto>>
+
 
 }
