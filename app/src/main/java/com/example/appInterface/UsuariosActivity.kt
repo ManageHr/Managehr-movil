@@ -24,6 +24,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class UsuariosActivity : BaseActivity() {
+    override val selfMenuItemId: Int = R.id.nav_usuarios
     private lateinit var adapter: UsuarioAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvMensaje: TextView

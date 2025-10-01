@@ -1,4 +1,4 @@
-package com.example.appInterface
+package com.example.appinterface
 
 import android.os.Bundle
 import android.view.View
@@ -15,6 +15,7 @@ import com.example.appinterface.Adapter.EstudiosAdapter
 import com.example.appinterface.Models.EstudiosDto
 import com.example.appinterface.Api.RetrofitInstance
 import com.example.appinterface.BaseActivity
+import com.example.appinterface.HojasvidaActivity
 import com.example.appinterface.R
 import retrofit2.Call
 import retrofit2.Callback

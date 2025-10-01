@@ -17,8 +17,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import androidx.appcompat.app.AlertDialog
+import com.example.appinterface.BaseActivity
+import com.example.appinterface.R
 
-// ⬇️ Cambiado: ahora hereda de BaseActivity
+
 class HorasExtraActivity : BaseActivity() {
     override val selfMenuItemId: Int = R.id.nav_horas_extra
 

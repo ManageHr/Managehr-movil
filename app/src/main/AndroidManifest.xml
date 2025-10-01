@@ -28,16 +28,16 @@
 
 		<!-- Pantallas con drawer: heredan de BaseActivity -->
 		<activity
-				android:name=".HorasExtraActivity"
+				android:name="com.example.appinterface.HorasExtraActivity"
 				android:exported="true" />
 		<activity
-				android:name="com.example.appInterface.EstudiosActivity"
+				android:name="com.example.appinterface.EstudiosActivity"
 				android:exported="true" />
 		<activity
-				android:name="com.example.appInterface.ExperienciaActivity"
+				android:name="com.example.appinterface.ExperienciaActivity"
 				android:exported="true" />
 		<activity
-				android:name="com.example.appInterface.HojasvidaActivity"
+				android:name="com.example.appinterface.HojasvidaActivity"
 				android:exported="false" />
 		<activity android:name=".IncapacidadesActivity"
 				  android:exported="true"/>
