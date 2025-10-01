@@ -31,14 +31,14 @@
 				android:name="com.example.appinterface.HorasExtraActivity"
 				android:exported="true" />
 		<activity
-				android:name="com.example.appinterface.EstudiosActivity"
+				android:name=".EstudiosActivity"
 				android:exported="true" />
 		<activity
-				android:name="com.example.appinterface.ExperienciaActivity"
+				android:name=".ExperienciaActivity"
 				android:exported="true" />
 		<activity
-				android:name="com.example.appinterface.HojasvidaActivity"
-				android:exported="false" />
+				android:name=".HojasvidaActivity"
+				android:exported="true" />
 		<activity android:name=".IncapacidadesActivity"
 				  android:exported="true"/>
 
