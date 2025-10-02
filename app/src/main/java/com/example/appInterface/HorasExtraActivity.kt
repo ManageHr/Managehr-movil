@@ -25,29 +25,29 @@ import com.example.appinterface.R
 class HorasExtraActivity : BaseActivity() {
     override val selfMenuItemId: Int = R.id.nav_horas_extra
 
-    // --------- Campos de UI ---------
+
     private lateinit var tvMensaje: TextView
     private lateinit var spinnerTipoHora: Spinner
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: HorasExtraAdapter
 
-    // --------- Ciclo de vida ---------
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Usa el contenedor del Drawer definido en BaseActivity
+
         setModuleContent(R.layout.horas_extra_main)
 
-        // Manejo de insets si el root del layout es @id/main
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // ====== Referencias UI ======
+
         tvMensaje = findViewById(R.id.tvMensaje)
         spinnerTipoHora = findViewById(R.id.spinnerTipoHora)
         setupSpinnerTipos()
@@ -74,9 +74,9 @@ class HorasExtraActivity : BaseActivity() {
         mostrarHorasExtra()
     }
 
-    // ========= Lógica =========
 
-    /** Llena el spinner con labels “<id> - <nombre>” */
+
+
     private fun setupSpinnerTipos() {
         val opcionesTipoHora = listOf(
             "2 - Diurna",
@@ -88,7 +88,7 @@ class HorasExtraActivity : BaseActivity() {
         spinnerTipoHora.adapter = adapterSpinner
     }
 
-    /** Extrae el entero del label seleccionado: "2 - Nocturna" -> 2 */
+
     private fun selectedTipoHorasId(): Int? {
         val label = spinnerTipoHora.selectedItem as? String ?: return null
         val match = Regex("""^\s*(\d+)""").find(label) ?: return null

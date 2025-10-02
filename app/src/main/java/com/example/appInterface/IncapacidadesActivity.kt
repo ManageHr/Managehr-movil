@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.appinterface.Adapter.HojaDeVidaAdapter
 import com.example.appinterface.Adapter.IncapacidadesAdapter
 import com.example.appinterface.Api.RetrofitInstance
 import com.example.appinterface.Models.IncapacidadesDto
@@ -22,7 +23,7 @@ import java.util.Locale
 
 class IncapacidadesActivity : BaseActivity() {
     override val selfMenuItemId: Int = R.id.nav_incapacidades
-    // UI
+
     private lateinit var tvMensaje: TextView
     private lateinit var tvArchivoSeleccionado: TextView
     private lateinit var etFechaInicio: EditText
@@ -32,10 +33,10 @@ class IncapacidadesActivity : BaseActivity() {
     private lateinit var adapter: IncapacidadesAdapter
     private lateinit var btnSeleccionarArchivo: Button
 
-    // Archivo seleccionado
+
     private var archivoUri: Uri? = null
 
-    // Launcher para seleccionar archivo (mimeType: cualquiera)
+
     private val pickFileLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
@@ -54,7 +55,7 @@ class IncapacidadesActivity : BaseActivity() {
         }
         supportActionBar?.title = "Manage Hr"
 
-        // refs
+
         tvMensaje = findViewById(R.id.tvMensaje)
         tvArchivoSeleccionado = findViewById(R.id.tvArchivoSeleccionado)
         etFechaInicio = findViewById(R.id.etFechaInicio)
@@ -62,15 +63,18 @@ class IncapacidadesActivity : BaseActivity() {
         etContratoId = findViewById(R.id.etContratoId)
         btnSeleccionarArchivo = findViewById(R.id.btnSeleccionarArchivo)
 
-        // abrir selector de archivos
+
         btnSeleccionarArchivo.setOnClickListener {
             pickFileLauncher.launch("*/*") // acepta cualquier archivo
         }
 
-        // recycler
+
         recycler = findViewById(R.id.RecyIncapacidades)
         recycler.layoutManager = LinearLayoutManager(this)
-        adapter = IncapacidadesAdapter()
+
+        adapter = IncapacidadesAdapter(emptyList()) { incapacidad ->
+            mostrarDialogoEditarIncapacidad(incapacidad)
+        }
         recycler.adapter = adapter
 
         findViewById<Button>(R.id.btnCrearIncapacidad).setOnClickListener { crearIncapacidad(it) }
@@ -79,7 +83,7 @@ class IncapacidadesActivity : BaseActivity() {
         cargarIncapacidades()
     }
 
-    // ===== helpers =====
+
     private fun isValidDate(date: String) =
         date.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))
 
@@ -163,4 +167,143 @@ class IncapacidadesActivity : BaseActivity() {
                 }
             })
     }
+    private fun mostrarDialogoEditarIncapacidad(incapacidad: IncapacidadesDto) {
+        val dialog = android.app.Dialog(this)
+        dialog.setContentView(R.layout.dialog_editar_incapacidades)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setCancelable(true)
+
+        // Referencias a los campos
+        val etArchivo = dialog.findViewById<EditText>(R.id.etArchivo)
+        val etEstado = dialog.findViewById<EditText>(R.id.etEstado)
+        val etFechaInicio = dialog.findViewById<EditText>(R.id.etFechaInicio)
+        val etFechaFinal = dialog.findViewById<EditText>(R.id.etFechaFinal)
+        val etContratoId = dialog.findViewById<EditText>(R.id.etContratoId)
+
+        // Rellenar con datos existentes
+        etArchivo.setText(incapacidad.archivo)
+        etEstado.setText(incapacidad.estado.toString())
+        etFechaInicio.setText(incapacidad.fechaInicio)
+        etFechaFinal.setText(incapacidad.fechaFinal)
+        etContratoId.setText(incapacidad.contratoId.toString())
+
+        // Botón guardar cambios
+        dialog.findViewById<Button>(R.id.btnGuardarCambios).setOnClickListener {
+            val nuevoArchivo = etArchivo.text.toString()
+            val nuevoEstado = etEstado.text.toString().toIntOrNull()
+            val nuevaFechaInicio = etFechaInicio.text.toString()
+            val nuevaFechaFinal = etFechaFinal.text.toString()
+            val nuevoContratoId = etContratoId.text.toString().toLongOrNull()
+
+            // Validaciones
+            if (nuevoArchivo.isEmpty() || nuevaFechaInicio.isEmpty() || nuevaFechaFinal.isEmpty() ||
+                nuevoEstado == null || nuevoContratoId == null) {
+                Toast.makeText(this, "Complete todos los campos correctamente", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidDateFormat(nuevaFechaInicio) || !isValidDateFormat(nuevaFechaFinal)) {
+                Toast.makeText(this, "Formato de fecha debe ser YYYY-MM-DD", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (nuevaFechaFinal < nuevaFechaInicio) {
+                Toast.makeText(this, "La fecha final no puede ser menor a la inicial", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (nuevoEstado !in listOf(0, 1)) {
+                Toast.makeText(this, "Estado debe ser 0 (inactivo) o 1 (activo)", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val incapacidadActualizada = incapacidad.copy(
+                archivo = nuevoArchivo,
+                estado = nuevoEstado,
+                fechaInicio = nuevaFechaInicio,
+                fechaFinal = nuevaFechaFinal,
+                contratoId = nuevoContratoId
+            )
+
+            actualizarIncapacidadEnApi(incapacidadActualizada)
+            dialog.dismiss()
+        }
+
+        // Botón eliminar
+        dialog.findViewById<Button>(R.id.btnEliminarIncapacidad).setOnClickListener {
+            dialog.dismiss()
+            mostrarDialogoConfirmarEliminacion(incapacidad)
+        }
+
+        // Botón cancelar
+        dialog.findViewById<Button>(R.id.btnCancelar).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun mostrarDialogoConfirmarEliminacion(incapacidad: IncapacidadesDto) {
+        val dialog = android.app.Dialog(this)
+        dialog.setContentView(R.layout.dialog_confirmar_eliminar_incapacidades)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setCancelable(true)
+
+        val tvMensaje = dialog.findViewById<TextView>(R.id.tvMensajeConfirmacion)
+        tvMensaje.text = "¿Estás seguro de que deseas eliminar la incapacidad del contrato: ${incapacidad.contratoId}?\n\nArchivo: ${incapacidad.archivo}\nEsta acción no se puede deshacer."
+
+        dialog.findViewById<Button>(R.id.btnCancelarEliminar).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.findViewById<Button>(R.id.btnConfirmarEliminar).setOnClickListener {
+            incapacidad.idIncapacidad?.let { id ->
+                eliminarIncapacidadEnApi(id)
+            } ?: run {
+                Toast.makeText(this, "ID de incapacidad no válido", Toast.LENGTH_SHORT).show()
+            }
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun actualizarIncapacidadEnApi(incapacidad: IncapacidadesDto) {
+        incapacidad.idIncapacidad?.let { id ->
+            RetrofitInstance.api2kotlin.actualizarIncapacidad(id, incapacidad).enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@IncapacidadesActivity, "Incapacidad actualizada", Toast.LENGTH_SHORT).show()
+                        cargarIncapacidades()
+                    } else {
+                        Toast.makeText(this@IncapacidadesActivity, "Error en actualización: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Toast.makeText(this@IncapacidadesActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+    }
+
+    private fun eliminarIncapacidadEnApi(id: Long) {
+        RetrofitInstance.api2kotlin.eliminarIncapacidad(id).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(this@IncapacidadesActivity, "Incapacidad eliminada", Toast.LENGTH_SHORT).show()
+                    cargarIncapacidades()
+                } else {
+                    Toast.makeText(this@IncapacidadesActivity, "Error al eliminar: ${response.code()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(this@IncapacidadesActivity, "Error de conexión", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    // Función auxiliar para validar formato de fecha
+    private fun isValidDateFormat(date: String): Boolean =
+        date.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))
 }

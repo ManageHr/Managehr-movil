@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appinterface.Models.IncapacidadesDto
 import com.example.appinterface.R
 
-class IncapacidadesAdapter : RecyclerView.Adapter<IncapacidadesAdapter.IncViewHolder>() {
+class IncapacidadesAdapter(
+    private val incapacidadesList: List<IncapacidadesDto>,
+    private val onItemClick: (IncapacidadesDto) -> Unit
+) : RecyclerView.Adapter<IncapacidadesAdapter.IncViewHolder>() {
 
     private var items: List<IncapacidadesDto> = emptyList()
 
@@ -31,6 +34,9 @@ class IncapacidadesAdapter : RecyclerView.Adapter<IncapacidadesAdapter.IncViewHo
         h.tvEstado.text = if (it.estado == 1) "Aprobado" else "Pendiente"
         h.tvFecha.text = "Del ${it.fechaInicio} al ${it.fechaFinal}"
         h.tvContrato.text = "Contrato: ${it.contratoId}"
+        h.itemView.setOnClickListener { _ ->
+            onItemClick(it)
+        }
     }
 
     override fun getItemCount(): Int = items.size

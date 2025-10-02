@@ -8,21 +8,7 @@
         android:background="#202940"
         tools:context=".LoginActivity">
 
-    <!-- Título Iniciar Sesión -->
 
-    <!-- Subtítulo Redes Sociales -->
-
-    <!-- Campo Correo electrónico -->
-
-    <!-- Campo Contraseña -->
-
-    <!-- ¿Olvidaste tu contraseña? -->
-
-    <!-- Botón Iniciar Sesión -->
-
-    <!-- Mensaje de bienvenida -->
-
-    <!-- Botón Ver Ofertas Laborales -->
     <TextView
             android:id="@+id/tvOlvidePassword"
             android:layout_width="wrap_content"

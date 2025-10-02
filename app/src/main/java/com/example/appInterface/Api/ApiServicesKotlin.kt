@@ -97,5 +97,9 @@ interface ApiServicesKotlin {
     @DELETE("api/horasextra/{id}")
     fun eliminarHorasExtra(@Path("id") id: Long): Call<Void>
 
+    @PUT("api/incapacidades/{id}")
+    fun actualizarIncapacidad(@Path("id") id: Long, @Body dto: IncapacidadesDto): Call<Void>
 
+    @DELETE("api/incapacidades/{id}")
+    fun eliminarIncapacidad(@Path("id") id: Long): Call<Void>
 }

@@ -42,7 +42,7 @@ class VacacionesActivity : BaseActivity() {
         }
         supportActionBar?.title = "Manage Hr"
 
-        // UI refs
+
         tvMensaje     = findViewById(R.id.tvMensaje)
         etMotivo      = findViewById(R.id.etMotivo)
         etFechaInicio = findViewById(R.id.etFechaInicio)
@@ -50,7 +50,7 @@ class VacacionesActivity : BaseActivity() {
         etContratoId  = findViewById(R.id.etContratoId)
         etDias        = findViewById(R.id.etDias)
 
-        // Recycler
+
         recycler = findViewById(R.id.RecyVacaciones)
         recycler.layoutManager = LinearLayoutManager(this)
         val vacaciones: List<VacacionesDto> = listOf() // o la que tengas
@@ -60,19 +60,19 @@ class VacacionesActivity : BaseActivity() {
 
         recycler.adapter = adapter
 
-        // Botones
+
         findViewById<Button>(R.id.btnCrearVacacion).setOnClickListener { crearVacacion(it) }
         findViewById<Button>(R.id.btnMostrarVacaciones).setOnClickListener { cargarVacaciones() }
 
         cargarVacaciones()
     }
 
-    // ===== Helpers =====
+
 
     private fun isValidDate(date: String) =
         date.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))
 
-    /** Cálculo de días inclusivo (compatible con minSdk bajos). */
+
     private fun diffDiasCompat(inicio: String, fin: String): Int? {
         val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US).apply { isLenient = false }
         return try {
@@ -97,7 +97,7 @@ class VacacionesActivity : BaseActivity() {
         etDias.text?.clear()
     }
 
-    // ===== Acciones =====
+
 
     private fun crearVacacion(view: View? = null) {
         val motivo   = etMotivo.text.toString().trim()
@@ -124,7 +124,7 @@ class VacacionesActivity : BaseActivity() {
         }
         if (dias <= 0) { showMsg("Días debe ser mayor a 0", true); return }
 
-        // IMPORTANTE: estos nombres deben coincidir con tu VacacionesDto
+
         val dto = VacacionesDto(
             idVacaciones = null,
             motivo       = motivo,
@@ -229,13 +229,13 @@ class VacacionesActivity : BaseActivity() {
             dialog.dismiss()
         }
 
-        // Botón eliminar
+
         dialog.findViewById<Button>(R.id.btnEliminarVacacion).setOnClickListener {
             dialog.dismiss()
             mostrarDialogoConfirmarEliminacion(vacacion)
         }
 
-        // Botón cancelar
+
         dialog.findViewById<Button>(R.id.btnCancelar).setOnClickListener {
             dialog.dismiss()
         }

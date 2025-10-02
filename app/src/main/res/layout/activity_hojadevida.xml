@@ -24,13 +24,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Campo ID (solo lectura, para mostrar, si es necesario) -->
-
-    <!-- Clave de la libreta militar -->
-
-    <!-- Número de libreta militar -->
-
-    <!-- Campo Usuario Número Documento -->
     <TextView
             android:id="@+id/tvId"
             android:layout_width="12dp"

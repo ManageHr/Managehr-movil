@@ -45,7 +45,7 @@ class EstudiosActivity : BaseActivity() {
         recyclerView = findViewById(R.id.RecyEstudios)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Adapter con función de clic
+
         adapter = EstudiosAdapter(emptyList()) { estudio ->
             mostrarDialogoEditarEstudio(estudio)
         }
@@ -111,8 +111,6 @@ class EstudiosActivity : BaseActivity() {
 
         crearEstudioEnApi(estudiosDto)
     }
-
-    // NUEVOS MÉTODOS PARA EDITAR Y ELIMINAR:
 
     private fun mostrarDialogoEditarEstudio(estudio: EstudiosDto) {
         val dialog = android.app.Dialog(this)
@@ -247,7 +245,7 @@ class EstudiosActivity : BaseActivity() {
         })
     }
 
-    // MÉTODOS EXISTENTES (mantener igual):
+
 
     private fun isValidDateFormat(date: String): Boolean {
         return date.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))

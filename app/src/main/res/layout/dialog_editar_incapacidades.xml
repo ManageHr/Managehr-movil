@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#202940"
+            android:padding="20dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <!-- Título -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Editar Incapacidad"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="20dp" />
+
+        <!-- Archivo -->
+        <EditText
+                android:id="@+id/etArchivo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Archivo"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:layout_marginBottom="8dp" />
+
+        <!-- Estado -->
+        <EditText
+                android:id="@+id/etEstado"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Estado (0=Inactivo, 1=Activo)"
+                android:inputType="number"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:layout_marginBottom="8dp" />
+
+        <!-- Fecha Inicio -->
+        <EditText
+                android:id="@+id/etFechaInicio"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Fecha Inicio (YYYY-MM-DD)"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:layout_marginBottom="8dp" />
+
+        <!-- Fecha Final -->
+        <EditText
+                android:id="@+id/etFechaFinal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Fecha Final (YYYY-MM-DD)"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:layout_marginBottom="8dp" />
+
+        <!-- Contrato ID -->
+        <EditText
+                android:id="@+id/etContratoId"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/edittext_background"
+                android:hint="ID Contrato"
+                android:inputType="number"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#CCCCCC"
+                android:padding="12dp"
+                android:layout_marginBottom="20dp" />
+
+        <!-- Botones -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+            <Button
+                    android:id="@+id/btnGuardarCambios"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/button_background"
+                    android:text="Guardar"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+            <Button
+                    android:id="@+id/btnEliminarIncapacidad"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/button_background_red"
+                    android:text="Eliminar"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+            <Button
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/button_background"
+                    android:text="Cancelar"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

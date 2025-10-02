@@ -33,7 +33,7 @@ class ExperienciaAdapter(
         holder.tvFechas.text = "${experiencia.fechaInicio} - ${experiencia.fechaFinalizacion}"
         holder.tvJefe.text = "Jefe: ${experiencia.nomJefe}"
 
-        // AGREGAR ESTO para el click:
+        // Evento click:
         holder.itemView.setOnClickListener {
             onItemClick(experiencia)
         }

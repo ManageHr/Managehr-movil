@@ -48,7 +48,7 @@ class ExperienciaActivity: BaseActivity() {
         recyclerView = findViewById(R.id.RecyExperiencias)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // MODIFICA ESTA LÍNEA para agregar el click:
+
         adapter = ExperienciaAdapter { experiencia ->
             mostrarDialogoEditarExperiencia(experiencia)
         }
@@ -186,7 +186,7 @@ class ExperienciaActivity: BaseActivity() {
         tvMensaje.text = mensaje
         tvMensaje.setTextColor(if (esError) 0xFFFF0000.toInt() else 0xFF00FF00.toInt())
     }
-    // MÉTODOS PARA EDITAR Y ELIMINAR:
+
 
     private fun mostrarDialogoEditarExperiencia(experiencia: ExperienciaDto) {
         val dialog = android.app.Dialog(this)
@@ -287,7 +287,7 @@ class ExperienciaActivity: BaseActivity() {
     private fun actualizarExperienciaEnApi(experiencia: ExperienciaDto) {
         val id = experiencia.idExperiencia ?: return
 
-        // CAMBIA Callback<Void> por Callback<ExperienciaDto>
+
         RetrofitInstance.api2kotlin.actualizarExperiencia(id, experiencia).enqueue(object : Callback<ExperienciaDto> {
             override fun onResponse(call: Call<ExperienciaDto>, response: Response<ExperienciaDto>) {
                 if (response.isSuccessful) {
@@ -310,7 +310,7 @@ class ExperienciaActivity: BaseActivity() {
     }
 
     private fun eliminarExperienciaEnApi(id: Long) {
-        // PARA ELIMINAR sí usa Callback<Void>
+
         RetrofitInstance.api2kotlin.eliminarExperiencia(id).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {

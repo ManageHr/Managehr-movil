@@ -56,7 +56,7 @@ class HojasvidaActivity: BaseActivity() {
             startActivity(intent)
         }
 
-        // Cargar la lista al inicio
+
         mostrarHojasDeVida()
     }
     fun regresar(view: View) {

@@ -83,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
                         val user = loginResponse?.user
 
                         if (token.isNotEmpty() && user != null) {
-                            // VERIFICAR SI EL USUARIO TIENE ROL = "1" (ADMIN)
+
                             if (user.rol == "1") {
                                 RetrofitInstance.setAuthToken(token)
                                 saveAuthToken(token)
@@ -94,16 +94,13 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(intent)
                                 finish()
                             } else {
-                                // USUARIO NO TIENE PERMISOS DE ADMIN
+
                                 Toast.makeText(
                                     this@LoginActivity,
                                     "Acceso denegado: No tiene permisos para ingresar",
                                     Toast.LENGTH_LONG
                                 ).show()
 
-                                // SOLO ELIMINA ESTAS 2 LÍNEAS O COMENTA:
-                                // RetrofitInstance.clearAuthToken()
-                                // clearAuthToken()
                             }
                         } else {
                             Toast.makeText(this@LoginActivity, "Error: Token vacío o usuario no encontrado", Toast.LENGTH_SHORT).show()

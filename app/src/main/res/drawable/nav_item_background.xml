@@ -5,7 +5,7 @@
     <item>
         <selector>
 
-            <!-- 🔴 Logout (item deshabilitado) SIN borde ni fondo -->
+
             <item android:state_enabled="false">
                 <inset
                         android:insetLeft="12dp"
@@ -20,7 +20,7 @@
                 </inset>
             </item>
 
-            <!-- ✅ Seleccionado -->
+
             <item android:state_checked="true">
                 <inset
                         android:insetLeft="12dp"
@@ -34,7 +34,7 @@
                 </inset>
             </item>
 
-            <!-- 👆 Presionado -->
+
             <item android:state_pressed="true">
                 <inset
                         android:insetLeft="12dp"
@@ -48,7 +48,7 @@
                 </inset>
             </item>
 
-            <!-- 🟣 Normal (otros items) -->
+            
             <item>
                 <inset
                         android:insetLeft="12dp"

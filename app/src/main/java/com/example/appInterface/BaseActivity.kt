@@ -15,7 +15,7 @@ abstract class BaseActivity : AppCompatActivity() {
     protected lateinit var navigationView: NavigationView
     private lateinit var toggle: ActionBarDrawerToggle
 
-    /** Cada sub-activity dirá cuál item del menú le corresponde (para resaltar) */
+
     protected abstract val selfMenuItemId: Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
